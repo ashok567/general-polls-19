@@ -1,7 +1,7 @@
 var margin = {top: 20, right: 160, bottom: 35, left: 30};
 
-var width = 600 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+var width  = 550 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
 // d3.csv('static/data/data.csv', function(data){console.log(data);});
 
@@ -21,7 +21,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
     var party  =  ['NDA','UPA','OTHERS']
-    var colors =  ['#A9A9A9','#D2691E',"#DAA520"]
+    var colors =  ['#FF4500','#32CD32',"#6495ED"]
 
     /* Data in strings like it would be if imported from a csv */
 
@@ -44,8 +44,8 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .range([10, width-10], 0.02);
 
     var y = d3.scaleLinear()
-      .domain([0, d3.max(dataset, function(d) {  return d3.max(d, function(d) { return d[1]; });  })])
-      .range([height, 0]);
+      // .domain([0, d3.max(dataset, function(d) {  return d3.max(d, function(d) { return d[1]; });  })])
+      .domain([0,600]).range([height, 0]);
 
     // Define and draw axes
     var yAxis = d3.axisLeft(y)
@@ -77,11 +77,11 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var rect = groups.selectAll("rect")
       .data(function(d) { return d; })
       .enter()
-      .append("rect")
-      .attr("x", function(d) { return _.each(d.data, function(k) { return x(k.POLLSTERS)}) })
+      .append("rect") 
+      .attr("x", function(d) { return x(d.data.POLLSTERS) })
       .attr("y", function(d) { return y(d[1]); })
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-      .attr("width", x.bandwidth()-10)
+      .attr("width", x.bandwidth()-15)
       .on("mouseover", function() { tooltip.style("display", null); })
       .on("mouseout", function() { tooltip.style("display", "none"); })
       .on("mousemove", function(d) {
@@ -95,7 +95,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     svg.append("text")
     .attr("class", "y label")
     .attr("text-anchor", "end")
-    .attr("x", -180)
+    .attr("x", -150)
     .attr("y",-40)
     .attr("font-size", "18")
     .attr("dy", ".35em")
@@ -105,7 +105,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     svg.append("text")
       .attr("class", "x label")
       .attr("text-anchor", "end")
-      .attr("x",width-150)
+      .attr("x",width-130)
       .attr("y",height+40)
       .attr("font-size", "18")
       .attr("dy", ".35em")
