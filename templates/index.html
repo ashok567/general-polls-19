@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href='{{ static_url("css/style.css") }}'> 
+    <title>Exit Poll</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ELECTION POLL</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ARTICLE</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">NOTA</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+          <div class="row"></div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="dropdown">
+                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ELECTION YEAR
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <script id="year_drop" type="text/html">
+                      <% _.each(year, function(data){ %> 
+                      <a class="dropdown-item" href="#"><%= data %></a>
+                      <% }) %>
+                    </script>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-lg-6">
+            <div class="d-flex justify-content-center align-items-center" id="canvas1">
+            </div>
+          </div>  
+          <div class="col-xs-6 col-lg-6">
+            <div class="d-flex justify-content-center align-items-center" id="canvas2">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script scr="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"> </script>
+    <script type="text/javascript" src='{{ static_url("js/basic.js") }}'></script>
+    <script>
+      $(document).ready(function(){ 
+        $.ajax({
+          type: 'GET',
+          url: '/data',
+        })
+        .done(function(data){
+
+          data = data['response'];
+          var year = _.map(data, 'YEAR')
+          year = _.uniqBy(year)
+          
+          var year_tmpl = _.template($("#year_drop").html());
+          var year_tmpl_html = year_tmpl({ year: year });
+          $(".dropdown-menu").html(year_tmpl_html);
+        })
+        .fail(function (error) {
+          console.log(error);
+        })
+      });
+    </script>
+
+  </body>
+</html>

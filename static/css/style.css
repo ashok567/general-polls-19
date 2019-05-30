@@ -1,0 +1,21 @@
+svg {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+fill: none;
+stroke: #000;
+}
+
+path.domain {
+stroke: none;
+}
+
+.y .tick line {
+stroke: #ddd;
+}
+
+#dropdownMenuButton{
+    margin-top: 20px
+}
