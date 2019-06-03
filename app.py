@@ -25,6 +25,11 @@ class DataHandler(RequestHandler):
         data = process.read_data()
         self.write({'response': json.loads(data)})
 
+class ScrapperHandler(RequestHandler):
+    def get(self):
+        data = process.extract_data()
+        self.write({'response': json.loads(data)})
+
 # class TodoItem(RequestHandler):
 #   def post(self, _):
 #     items.append(json.loads(self.request.body))
@@ -42,6 +47,7 @@ def make_app():
     [
         (r'/', MainHandler),
         (r'/data', DataHandler),
+        (r'/scrap', ScrapperHandler),
         # (r'/fetch', FetchHandler)
     ],**settings)
 

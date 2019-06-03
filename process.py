@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import requests
 import pandas as pd
 import json
 
@@ -9,6 +10,7 @@ def read_data():
 
 def extract_data():
     url = 'https://timesofindia.indiatimes.com/elections/results'
-    soup = BeautifulSoup(url, 'lxml')
+    response = requests.get(url.strip()).text
+    soup = BeautifulSoup(response, 'lxml')
     test = soup.find("div", property="id:stateBody")
-    return test
+    return json.dumps(test)

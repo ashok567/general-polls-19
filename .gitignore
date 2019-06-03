@@ -7,6 +7,7 @@
 # Ignore byte-compiled / optimised / DLL files
 __pycache__/
 *.py[cod]
+o.py
 
 # Ignore SQLite3 files.
 *.sqlite3
