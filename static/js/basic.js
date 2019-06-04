@@ -1,3 +1,8 @@
+
+$('body')    
+// Anything with a title= or data-title= attribute will be shown as a tooltip
+.tooltip({selector: '[title],[data-title],[data-original-title]', container: 'body', html: true, animated: 'fade'})
+
 var margin = {top: 20, right: 160, bottom: 35, left: 30};
 
 var width  = 550 - margin.left - margin.right,
@@ -82,15 +87,11 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .attr("y", function(d) { return y(d[1]); })
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
       .attr("width", x.bandwidth()-15)
-      // .on("mouseover", function() { tooltip.style("display", null); })
-      // .on("mouseout", function() { tooltip.style("display", "none"); })
-      // .on("mousemove", function(d) {
-      //   var xPosition = d3.mouse(this)[0] - 15;
-      //   var yPosition = d3.mouse(this)[1] - 25;
-      //   tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-      //   tooltip.select("text").text(d[1]-d[0]);
-    });
-
+      .attr('data-placement', 'right')
+      .attr('data-toggle', 'popover')
+      .attr('data-title', function(d){
+        return d[1]-d[0]  
+      })
 
     svg.append("text")
     .attr("class", "y label")
@@ -159,7 +160,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       //   .attr("font-weight", "bold");
 
   })
+
   .fail(function (error) {
     console.log(error);
   })  
+
 });
