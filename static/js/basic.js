@@ -35,8 +35,8 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var dataset = stack(year_dataset)
 
     $('#canvas1').empty();
-    $('#canvas2').empty();
-    var svg = d3.selectAll("#canvas1, #canvas2")
+    // $('#canvas2').empty();
+    var svg = d3.selectAll("#canvas1")
     .append("svg")
     .attr("width", width + 2*margin.left + 2*margin.right)
     .attr("height", height + 2*margin.top + 2*margin.bottom)
