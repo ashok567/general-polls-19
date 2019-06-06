@@ -5,7 +5,7 @@ $('body')
 
 var margin = {top: 20, right: 160, bottom: 35, left: 30};
 
-var width  = 550 - margin.left - margin.right,
+var width  = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // d3.csv('static/data/data.csv', function(data){console.log(data);});
@@ -86,7 +86,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .attr("x", function(d) { return x(d.data.POLLSTERS) })
       .attr("y", function(d) { return y(d[1]); })
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-      .attr("width", x.bandwidth()-15)
+      .attr("width", x.bandwidth()-20)
       .attr('data-placement', 'right')
       .attr('data-toggle', 'popover')
       .attr('data-title', function(d){
