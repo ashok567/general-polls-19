@@ -23,3 +23,11 @@ path.domain {
 #seat_table{
     display: none;
 }
+
+#canvas1{
+    padding: 5px;
+}
+
+#canvas2{
+    padding: 50px;
+}

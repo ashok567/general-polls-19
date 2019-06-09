@@ -18,22 +18,26 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
   })
   .done(function(data){
     res_data = data.response;
-    table_data = _.map(res_data, ['POLLSTERS', 'NDA', 'UPA', 'OTHERS'])
+    
+    var year_dataset = _.filter(res_data, function(res){
+      return res.YEAR == selected_year; 
+    });
+
+    var table_data = _.map(year_dataset, function(d){ return [d.POLLSTERS, d.NDA, d.UPA, d.OTHERS] });
     console.log(table_data)
+    
     $("#seat_table").show();
     $("#seat_table").DataTable({
-      data: res_data,
+      data: table_data,
       columns: [
         {title: "POLLSTERS"},
         {title: "NDA"},
         {title: "UPA"},
         {title: "OTHERS"}
-      ]
+      ],
+      "order": false
     });
     
-    var year_dataset = _.filter(res_data, function(res){
-      return res.YEAR == selected_year; 
-    });
 
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
@@ -118,7 +122,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     svg.append("text")
       .attr("class", "x label")
       .attr("text-anchor", "end")
-      .attr("x",width-130)
+      .attr("x",width-170)
       .attr("y",height+40)
       .attr("font-size", "18")
       .attr("dy", ".35em")
