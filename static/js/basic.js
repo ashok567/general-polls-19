@@ -18,6 +18,18 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
   })
   .done(function(data){
     res_data = data.response;
+    table_data = _.map(res_data, ['POLLSTERS', 'NDA', 'UPA', 'OTHERS'])
+    console.log(table_data)
+    $("#seat_table").show();
+    $("#seat_table").DataTable({
+      data: res_data,
+      columns: [
+        {title: "POLLSTERS"},
+        {title: "NDA"},
+        {title: "UPA"},
+        {title: "OTHERS"}
+      ]
+    });
     
     var year_dataset = _.filter(res_data, function(res){
       return res.YEAR == selected_year; 
@@ -77,7 +89,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .attr("class", "cost")
       .style("fill", function(d, i) { return colors[i]; });
 
-    console.log(_.each(dataset, function(d){ return d } ))
+    // console.log(_.each(dataset, function(d){ return d } ))
 
     var rect = groups.selectAll("rect")
       .data(function(d) { return d; })
@@ -141,24 +153,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       });
       
       
-      // // Prep the tooltip bits, initial display is hidden
-      // var tooltip = svg.append("g")
-      //   .attr("class", "tooltip")
-      //   .style("display", "none");
-          
-      // tooltip.append("rect")
-      //   .attr("width", 30)
-      //   .attr("height", 20)
-      //   .attr("fill", "white")
-      //   .style("opacity", 0.5);
       
-      // tooltip.append("text")
-      //   .attr("x", 15)
-      //   .attr("dy", "1.2em")
-      //   .style("text-anchor", "middle")
-      //   .attr("font-size", "12px")
-      //   .attr("font-weight", "bold");
-
   })
 
   .fail(function (error) {

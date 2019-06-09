@@ -4,18 +4,22 @@ svg {
 
 .axis path,
 .axis line {
-fill: none;
-stroke: #000;
+    fill: none;
+    stroke: #000;
 }
 
 path.domain {
-stroke: none;
+    stroke: none;
 }
 
 .y .tick line {
-stroke: #ddd;
+    stroke: #ddd;
 }
 
 #dropdownMenuButton{
-    margin-top: 20px
+    margin-top: 20px;
+}
+
+#seat_table{
+    display: none;
 }
