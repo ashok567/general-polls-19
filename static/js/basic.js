@@ -26,7 +26,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var table_data = _.map(year_dataset, function(d){ return [d.POLLSTERS, d.NDA, d.UPA, d.OTHERS] });
     console.log(table_data)
     
+    $("#seat_table").DataTable().destroy();
     $("#seat_table").show();
+    
     $("#seat_table").DataTable({
       data: table_data,
       columns: [
@@ -38,7 +40,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       "order": false
     });
     
-
+    
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
     var party  =  ['NDA','UPA','OTHERS']
