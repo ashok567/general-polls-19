@@ -44,7 +44,8 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
     var party  =  ['NDA','UPA','OTHERS']
-    var colors =  ['#FF4500','#32CD32',"#6495ED"]
+    // var colors =  ['#FF4500','#32CD32',"#6495ED"]
+    var colors = ['#ff7f00','#4daf4a','#377eb8']
 
     /* Data in strings like it would be if imported from a csv */
 

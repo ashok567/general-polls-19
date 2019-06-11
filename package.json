@@ -1,0 +1,27 @@
+{
+  "name": "general-election-2019",
+  "version": "1.0.0",
+  "description": "general election polls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashok567/general-polls-19.git"
+  },
+  "author": "Ashok Thakur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashok567/general-polls-19/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "d3": "^5.9.2",
+    "datatables": "^1.10.18",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.11",
+    "popper.js": "^1.15.0",
+    "tooltip.js": "^1.3.2"
+  }
+}
