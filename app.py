@@ -37,7 +37,7 @@ class ScrapperHandler(RequestHandler):
 
 settings = dict(
     template_path = os.path.join(os.path.dirname(__file__),'templates'),
-    static_path = os.path.join(os.path.dirname(__file__),'static'),
+    # static_path = os.path.join(os.path.dirname(__file__),'static'),
     debug=True
 )
 
@@ -48,7 +48,8 @@ def make_app():
         (r'/', MainHandler),
         (r'/data', DataHandler),
         (r'/scrap', ScrapperHandler),
-        # (r'/fetch', FetchHandler)
+        (r'/(.*)', tornado.web.StaticFileHandler, {"path": ""}),
+
     ],**settings)
 
 
