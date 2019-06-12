@@ -23,8 +23,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       return res.YEAR == selected_year; 
     });
 
+    
     var table_data = _.map(year_dataset, function(d){ return [d.POLLSTERS, d.NDA, d.UPA, d.OTHERS] });
-    console.log(table_data)
+    
     
     $("#seat_table").DataTable().destroy();
     $("#seat_table").show();
@@ -158,6 +159,45 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
           case 2: return party[2];
         }
       });
+
+      $("#canvas3").empty();
+      var svg1 = d3.selectAll("#canvas3").append("svg").attr('width', 300).attr('height', 180);
+      var width1 = svg1.attr('width');
+      var height1 = svg1.attr('height');
+      var g = svg1.append("g").attr("transform", "translate(" + width1 / 2 + "," + height1 / 2 + ")");
+      
+      
+      var color = d3.scaleOrdinal(['#ff7f00','#4daf4a','#377eb8']);
+
+      
+      var official_seat = _.filter(year_dataset,function(res){
+        return res.POLLSTERS == 'Official'; 
+      });
+
+      var final_seat = _.pick(official_seat[0], party)
+
+      var data = _.map(final_seat, function(value, key){
+        return {Party: key, Seat: value};
+      });
+    
+      var pie = d3.pie().value(function(d) { return d.Seat; });
+      var radius = Math.min(width1, height1) / 2;
+      
+      var arc = d3.arc().innerRadius(50).outerRadius(radius);
+
+      // var label = d3.arc().innerRadius(radisu-80).outerRadius(radius);
+      
+      var arcs = g.selectAll('arc').data(pie(data)).enter().append('g').attr('class', 'arc');
+
+      arcs.append('path').attr('d', arc).attr('fill', function(d){ return color(d.data.Party) })
+      .attr('data-placement', 'right')
+      .attr('data-toggle', 'popover')
+      .attr('data-title', function(d){
+        return d.data.Seat 
+      });
+
+      // arcs.append("text").attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+      // .text(function(d) { return d.data.party ; });
       
       
       
