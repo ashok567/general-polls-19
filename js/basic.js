@@ -38,14 +38,13 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
         {title: "UPA"},
         {title: "OTHERS"}
       ],
-      "order": false
+      order: false,
     });
     
     
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
     var party  =  ['NDA','UPA','OTHERS']
-    // var colors =  ['#FF4500','#32CD32',"#6495ED"]
     var colors = ['#ff7f00','#4daf4a','#377eb8']
 
     /* Data in strings like it would be if imported from a csv */
@@ -55,11 +54,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var dataset = stack(year_dataset)
 
     $('#canvas1').empty();
-    // $('#canvas2').empty();
     var svg = d3.selectAll("#canvas1")
-    .append("svg")
-    .attr("width", width + 2*margin.left + 2*margin.right)
-    .attr("height", height + 2*margin.top + 2*margin.bottom)
+    .append("svg").attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 600 500").classed("svg-content", true)
     .append("g")
     .attr("transform", "translate(" + 2*margin.left + "," + 2*margin.top + ")");
 
@@ -161,7 +158,11 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       });
 
       $("#canvas3").empty();
-      var svg1 = d3.selectAll("#canvas3").append("svg").attr('width', 300).attr('height', 180);
+      var svg1 = d3.selectAll("#canvas3").append("svg")
+      .attr('width', 300).attr('height', 180);
+      // .attr("preserveAspectRatio", "xMinYMin meet")
+      // .attr("viewBox", "0 0 300 180").classed("svg-content", true);
+      
       var width1 = svg1.attr('width');
       var height1 = svg1.attr('height');
       var g = svg1.append("g").attr("transform", "translate(" + width1 / 2 + "," + height1 / 2 + ")");
