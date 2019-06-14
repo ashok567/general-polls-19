@@ -17,6 +17,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     url: '/data',
   })
   .done(function(data){
+    
     res_data = data.response;
     
     var year_dataset = _.filter(res_data, function(res){
@@ -40,8 +41,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       ],
       order: false,
     });
-    
-    
+
+    $('#download').removeClass('disabled');
+     
     var pollsters = _.map(year_dataset, 'POLLSTERS');
     
     var party  =  ['NDA','UPA','OTHERS']

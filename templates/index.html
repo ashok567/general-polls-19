@@ -22,13 +22,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#">HOME</a>
+                <a class="nav-link" href="/">HOME</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">ARTICLE</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">NOTA</a>
+                <a class="nav-link" href="#" id="download">DOWNLOAD</a>
               </li>
             </ul>
           </div>
@@ -84,6 +81,7 @@
     <script src="./node_modules/lodash/lodash.min.js"></script>
     <script src="./node_modules/d3/dist/d3.min.js"></script>
     <script src="./node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="./node_modules/table2csv/dist/table2csv.min.js"></script>
     <script type="text/javascript" src="./js/basic.js"></script>
     
     
@@ -107,7 +105,19 @@
           $(".dropdown").show();
           $(".dropdown-menu").html(year_tmpl_html);
           
-
+          $('#download').addClass('disabled');
+          $("#download").click(function(){
+            let options = {
+              "separator": ",",
+              "newline": "\n",
+              "quoteFields": true,
+              "excludeColumns": "",
+              "excludeRows": "",
+              "trimContent": true,
+              "filename": "data.csv",
+            }
+            
+            $("#seat_table").table2csv('download', options); });
         })
         .fail(function (error) {
           console.log(error);
