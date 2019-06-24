@@ -33,11 +33,7 @@ path.domain {
 }
 
 #canvas3 {
-    display: inline-block;
-    position: relative;
-    width: 100%;
     margin-bottom: 20px;
-    
 }
 
 .svg-content {

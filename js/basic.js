@@ -125,7 +125,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     svg.append("text")
       .attr("class", "x label")
       .attr("text-anchor", "end")
-      .attr("x",width-170)
+      .attr("x",width-150)
       .attr("y",height+40)
       .attr("font-size", "18")
       .attr("dy", ".35em")
@@ -161,7 +161,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
 
       $("#canvas3").empty();
       var svg1 = d3.selectAll("#canvas3").append("svg")
-      .attr('width', 300).attr('height', 180);
+      .attr('width', 360).attr('height', 180);
       // .attr("preserveAspectRatio", "xMinYMin meet")
       // .attr("viewBox", "0 0 300 180").classed("svg-content", true);
       
@@ -170,7 +170,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       var g = svg1.append("g").attr("transform", "translate(" + width1 / 2 + "," + height1 / 2 + ")");
       
       
-      var color = d3.scaleOrdinal(['#ff7f00','#4daf4a','#377eb8']);
+      var color = d3.scaleOrdinal(colors);
 
       
       var official_seat = _.filter(year_dataset,function(res){
@@ -193,7 +193,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       var arcs = g.selectAll('arc').data(pie(data)).enter().append('g').attr('class', 'arc');
 
       arcs.append('path').attr('d', arc).attr('fill', function(d){ return color(d.data.Party) })
-      .attr('data-placement', 'right')
+      .attr('data-placement', 'left')
       .attr('data-toggle', 'popover')
       .attr('data-title', function(d){
         return d.data.Seat 
@@ -201,6 +201,34 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
 
       // arcs.append("text").attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
       // .text(function(d) { return d.data.party ; });
+
+
+    var legend1 = svg1.selectAll(".legend")
+    .data(colors)
+    .enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d, i) { return "translate(130," + i * 20 + ")"; });
+    
+    legend1.append("rect")
+      .attr("x", 130 + 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", function(d, i) {return colors[i];});
+
+
+    legend1.append("text")
+      .attr("x", 130 + 40)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "start")
+      .style("font-size", 12)
+      .text(function(d, i) { 
+        switch (i) {
+          case 0: return data[0].Seat+ " Seats";
+          case 1: return data[1].Seat+ " Seats";
+          case 2: return data[2].Seat+ " Seats";
+        }
+    });
       
       
       
