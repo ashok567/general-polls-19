@@ -33,6 +33,8 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     
     $("#seat_table").DataTable({
       data: table_data,
+      "bPaginate": false,
+      "bInfo": false,  
       columns: [
         {title: "POLLSTERS"},
         {title: "NDA"},
@@ -137,17 +139,17 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .data(colors)
       .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(30," + i * 20 + ")"; });
+      .attr("transform", function(d, i) { return "translate(10," + i * 20 + ")"; });
       
     legend.append("rect")
-      .attr("x", width + 18)
+      .attr("x", width + 10)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", function(d, i) {return colors[i];});
 
 
     legend.append("text")
-      .attr("x", width + 40)
+      .attr("x", width + 32)
       .attr("y", 9)
       .attr("dy", ".35em")
       .style("text-anchor", "start")
