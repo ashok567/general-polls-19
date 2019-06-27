@@ -28,13 +28,16 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var table_data = _.map(year_dataset, function(d){ return [d.POLLSTERS, d.NDA, d.UPA, d.OTHERS] });
     
     
+    $("#heading").html('<h5>Official Results</h5>');
     $("#seat_table").DataTable().destroy();
     $("#seat_table").show();
     
     $("#seat_table").DataTable({
       data: table_data,
-      "bPaginate": false,
-      "bInfo": false,  
+      // bPaginate: false,
+      // bInfo: false,  
+      pageLength: 4,
+      lengthChange: false,
       columns: [
         {title: "POLLSTERS"},
         {title: "NDA"},
@@ -127,7 +130,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     svg.append("text")
       .attr("class", "x label")
       .attr("text-anchor", "end")
-      .attr("x",width-150)
+      .attr("x",width-180)
       .attr("y",height+40)
       .attr("font-size", "18")
       .attr("dy", ".35em")
@@ -195,7 +198,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       var arcs = g.selectAll('arc').data(pie(data)).enter().append('g').attr('class', 'arc');
 
       arcs.append('path').attr('d', arc).attr('fill', function(d){ return color(d.data.Party) })
-      .attr('data-placement', 'left')
+      .attr('data-placement', 'right')
       .attr('data-toggle', 'popover')
       .attr('data-title', function(d){
         return d.data.Seat 
