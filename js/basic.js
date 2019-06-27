@@ -28,7 +28,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     var table_data = _.map(year_dataset, function(d){ return [d.POLLSTERS, d.NDA, d.UPA, d.OTHERS] });
     
     
-    $("#heading").html('<h5>Official Results</h5>');
+    $("#heading").html('<h5>Official Results - '+selected_year+'</h5>');
     $("#seat_table").DataTable().destroy();
     $("#seat_table").show();
     
@@ -112,7 +112,7 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
       .attr("height", function(d) { return y(d[0]) - y(d[1]); })
       .attr("width", x.bandwidth()-20)
       .attr('data-placement', 'right')
-      .attr('data-toggle', 'popover')
+      // .attr('data-toggle', 'popover')
       .attr('data-title', function(d){
         return d[1]-d[0]  
       })
@@ -166,9 +166,9 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
 
       $("#canvas3").empty();
       var svg1 = d3.selectAll("#canvas3").append("svg")
-      .attr('width', 360).attr('height', 180);
+      .attr('width', 300).attr('height', 180)
       // .attr("preserveAspectRatio", "xMinYMin meet")
-      // .attr("viewBox", "0 0 300 180").classed("svg-content", true);
+      // .attr("viewBox", "0 0 360 180").classed("svg-content", true);
       
       var width1 = svg1.attr('width');
       var height1 = svg1.attr('height');
@@ -215,23 +215,23 @@ $('.dropdown-menu').on('click', '.dropdown-item' ,function(){
     .attr("transform", function(d, i) { return "translate(130," + i * 20 + ")"; });
     
     legend1.append("rect")
-      .attr("x", 130 + 18)
+      .attr("x", 120)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", function(d, i) {return colors[i];});
 
 
     legend1.append("text")
-      .attr("x", 130 + 40)
+      .attr("x", 140)
       .attr("y", 9)
       .attr("dy", ".35em")
       .style("text-anchor", "start")
       .style("font-size", 12)
       .text(function(d, i) { 
         switch (i) {
-          case 0: return data[0].Seat+ " Seats";
-          case 1: return data[1].Seat+ " Seats";
-          case 2: return data[2].Seat+ " Seats";
+          case 0: return data[0].Seat;
+          case 1: return data[1].Seat;
+          case 2: return data[2].Seat;
         }
     });
       
