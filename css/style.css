@@ -36,6 +36,10 @@ path.domain {
     margin-bottom: 20px;
 }
 
+#source{
+    padding-left: 100px;
+}
+
 .svg-content {
     display: inline-block;
     position: absolute;

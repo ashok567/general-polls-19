@@ -16,18 +16,10 @@ class MainHandler(RequestHandler):
     #     self.write({'message': data})
     #     self.redirect("/fetch")
 
-# class FetchHandler(RequestHandler):
-#     def get(self):
-#         self.render("success.html")
 
 class DataHandler(RequestHandler):
     def get(self):
         data = process.read_data()
-        self.write({'response': json.loads(data)})
-
-class ScrapperHandler(RequestHandler):
-    def get(self):
-        data = process.extract_data()
         self.write({'response': json.loads(data)})
 
 # class TodoItem(RequestHandler):
@@ -47,7 +39,6 @@ def make_app():
     [
         (r'/', MainHandler),
         (r'/data', DataHandler),
-        (r'/scrap', ScrapperHandler),
         (r'/(.*)', tornado.web.StaticFileHandler, {"path": ""}),
 
     ],**settings)
