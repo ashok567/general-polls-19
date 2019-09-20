@@ -1,5 +1,5 @@
 import pandas as pd
-import json
+
 
 def read_data():
     df = pd.read_csv('data/data.csv')
